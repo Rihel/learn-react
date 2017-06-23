@@ -8,10 +8,10 @@ var todolist = {
         title: 'finish exercise'
     }, {
         completed: false,
-        title: 'lean jsx'
+        title: 'lean vue'
     }, {
         completed: true,
-        title: 'lean react'
+        title: 'lean vuex'
     }]
 };
 class Todo extends Component {
@@ -70,11 +70,19 @@ class Todo extends Component {
     render() {
         let { todos, type } = this.state;
         return (
-            <div>
-                <input type="text" ref="text" onKeyDown={e => e.keyCode === 13 ? this.add() : false} />
-                <input type="button" value={"添加"} onClick={this.add} />
-                <TodoList todos={todos} delete={this.delete} type={type} change={this.change} />
+            <div className={style.todoBox}>
+                <h3>任务列表</h3>
+                <div className={style.form}>
+                    <input type="text" ref="text"
+                        onKeyDown={e => e.keyCode === 13 ? this.add() : false}
+                        placeholder="请输入任务名" />
+                    <input type="button" value={"添加"} onClick={this.add} className={style.btn} />
+                </div>
+                <p>筛选任务</p>
                 <Footer filter={this.filter} />
+                <p>点击任务名即可完成任务</p>
+                <TodoList todos={todos} delete={this.delete} type={type} change={this.change} />
+
             </div>
         )
     }
@@ -84,22 +92,22 @@ class TodoList extends Component {
         let { todos, type } = this.props
         console.log(type)
         return (
-            <ul>
+            <ul className={style.todoList}>
                 {
                     todos.map((item, i) => {
                         switch (type) {
                             case 'active':
                                 if (!item.completed) {
-                                    return <TodoItem todo={item} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
+                                    return <TodoItem todo={item} index={i} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
                                 }
                                 break;
                             case 'completed':
                                 if (item.completed) {
-                                    return <TodoItem todo={item} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
+                                    return <TodoItem todo={item} index={i} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
                                 }
                                 break;
                             case 'all':
-                                return <TodoItem todo={item} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
+                                return <TodoItem todo={item} index={i} key={i} change={this.props.change(i)} delete={this.props.delete(i)} />
                         }
                     })
                 }
@@ -108,29 +116,22 @@ class TodoList extends Component {
     }
 }
 
-class TodoItem extends Component {
-    render() {
-        return (
-            <li style={{ textDecoration: this.props.todo.completed ? ' line-through' : 'none' }} onClick={this.props.change}>
-                {this.props.todo.title} <input type="button" value="删除" onClick={this.props.delete} />
-            </li>
-        );
-    }
-}
+const TodoItem = props => (
+    <li onClick={props.change}>
+        {props.index + 1}
+        <span style={{ textDecoration: props.todo.completed ? ' line-through' : 'none' }}> {props.todo.title}</span>
+        <input type="button" value="删除" onClick={props.delete} className={style.btn} />
+    </li>
+)
 
 
-class Footer extends Component {
-    render() {
-        return (
-            <div>
-                <span onClick={this.props.filter('active')}>active</span><span>  =============</span>
-                <span onClick={this.props.filter('completed')}>completed</span><span>  =============</span>
-                <span onClick={this.props.filter('all')}>all</span>
-            </div>
-        );
-    }
-}
-
+const Footer = props => (
+    <div className={style.control}>
+        <span onClick={props.filter('active')}>未完成</span>
+        <span onClick={props.filter('completed')}>已完成</span>
+        <span onClick={props.filter('all')}>所有</span>
+    </div>
+)
 
 
 

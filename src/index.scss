@@ -1,3 +1,52 @@
-.box{
-    display: flex;
+*{
+    box-sizing: border-box;
+}
+.todoBox {
+    width: 500px;
+    margin: 0 auto;
+    p{
+        color: #222;
+        font-size: 12px;
+    }
+    @at-root.btn{
+          border: none;
+            background: hotpink;
+            color: #fff;
+    }
+    .form {
+        display: flex;
+        width: 100%;
+         justify-content: space-between;
+        input {
+            padding: 5px 8px;
+        }
+        input[type="text"] {
+            flex: 5;
+            border: 1px solid hotpink;
+        }
+        input[type="button"] {
+            flex: 1;
+          
+        }
+    }
+    @at-root.todoList {
+        list-style: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        li {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            border-bottom: 1px solid #edf;  
+            span{
+                font-weight: bold;
+                text-shadow: 1px 1px 1px #000;
+            }
+        }
+    }
+    @at-root.control{
+        display: flex;
+        justify-content: space-between;
+    }
 }
