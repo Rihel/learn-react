@@ -133,8 +133,43 @@ const Footer = props => (
     </div>
 )
 
+let finish=[];
 
+let Studnets=[
+    '荣文杰',
+    '陈艺全',
+    '黄豪',
+    '杨晓涛',
+    '李志聪',
+    '朱星哲',
+    '曾蕴怡',
+    '朱丽凡',
+    '陈祥蕊',
+    '罗英毅',
+    '何绮雯',
+    '张晓兰',
+    '谢婷',
+    '贺雯钰',
+    '唐玥',
+    '陈裕锋',
+    '吴永记',
+    '朱锦秀',
+    '陈桦浩',
+    '王凯佳',
+    '邓艳菊',
+    '李美静',
+    '黄妙芳',
+    '张伟',
+    '张琪',
+    '彭升',
+    '梁尹',
+    '农嘉松',
+    '田浪浪',
+    '雷铭豪'
+]
 
+const randomNumber=number=>Math.floor(Math.random()*number);
+const getStudent=()=>Studnets[randomNumber(Studnets.length)];
 
 let root = document.createElement('div');
 document.body.appendChild(root);
