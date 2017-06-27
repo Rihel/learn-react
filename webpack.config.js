@@ -16,10 +16,14 @@ module.exports = {
         path: path.resolve(BUILD_PATH),
         filename: '[name].js'
     },
+    resolve: {
+        extensions: ['.js', '.scss', '.jsx'],
+    },
     module: {
         rules: [{
                 test: /\.(js|jsx)$/,
-                loader: ['babel-loader']
+                loader: ['babel-loader'],
+                exclude: /node_modules/
             },
             {
                 test: /\.(css|sass|scss)$/,
