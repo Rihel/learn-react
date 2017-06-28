@@ -9,7 +9,7 @@ const ROOT_PATH = path.resolve(__dirname),
 
 module.exports = {
     entry: {
-        app: path.resolve(APP_PATH, './part2/app.jsx'),
+        app: path.resolve(APP_PATH, './part3/app.jsx'),
         // common: ['react', 'react-dom'],
     },
     output: {
