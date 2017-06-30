@@ -45,4 +45,8 @@ const user = (state = 13533797833, action) => {
     }
 }
 
-export default combineReducers({todos, visibilityFilter, user})
+export default combineReducers({
+    todos, 
+    visibilityFilter,
+    user
+})
