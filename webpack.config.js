@@ -7,10 +7,12 @@ const ROOT_PATH = path.resolve(__dirname),
     htmlWebpack = require('html-webpack-plugin'),
     Ex = require('extract-text-webpack-plugin');
 
+const NODE_DEV = process.env.NODE_DEV;
+let isDEV = NODE_DEV === 'dev';
 module.exports = {
     entry: {
-        app: path.resolve(APP_PATH, './part3/app.jsx'),
-        // common: ['react', 'react-dom'],
+        app: path.resolve(APP_PATH, './cnode/app.jsx'),
+        common: ['react', 'react-dom'],
     },
     output: {
         path: path.resolve(BUILD_PATH),
@@ -35,7 +37,8 @@ module.exports = {
                             options: {
                                 importLoaders: 1,
                                 modules: true,
-                                localIdentName: '[name]-[local]-[hash:base64:5]'
+                                localIdentName: '[name]-[local]-[hash:base64:5]',
+                                minimize: !isDEV
                             }
                         },
                         {
@@ -69,8 +72,13 @@ module.exports = {
         ]
     },
     plugins: [
-        // new webpack.optimize.ModuleConcatenationPlugin(),
-
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new Browser(), 
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'common',
+            filename: '[name].js',
+            minChunks: 2
+        }),
         new htmlWebpack({
             template: './index.html'
         }),
