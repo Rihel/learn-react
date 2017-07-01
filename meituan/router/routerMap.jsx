@@ -17,7 +17,7 @@ export default class RouterMap extends Component {
             this.setState({
                 isDone:true
             })
-        },2000)
+        },100)
     }
     
     render() {

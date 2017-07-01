@@ -1,14 +1,19 @@
-import {combineReducers} from 'redux';
+import {
+    combineReducers
+} from 'redux';
+import {
+    INIT_CITYS
+} from '../actions/action';
 
-const test = (state = 0, action) => {
+const citys = (state = {}, action) => {
     switch (action.type) {
-        case 'TYPE1':
-            return action.id;
+        case INIT_CITYS:
+            return Object.assign({}, state, action.citys);
         default:
             return state;
     }
 }
 
 export default combineReducers({
-    test
+    citys
 })
