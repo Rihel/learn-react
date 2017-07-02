@@ -1,0 +1,57 @@
+@import '../../common/scss/_mixin.scss';
+
+.home-list-item{
+   display: flex;
+   padding: 10px;
+   border-bottom: 1px solid #eee;
+    background: #fff;
+   .thumbail{
+
+      flex: 1;
+       height: 90px;
+       overflow: hidden;
+       img{
+           width: 100%;
+           
+       }
+   }
+   .text{
+       padding: 0 10px;
+       flex: 2;
+       display: flex;
+       flex-direction: column;
+       justify-content: space-between;
+       .title{
+           display: flex;
+           justify-content: space-between;
+           h2{
+                   font-size: 17px;
+                    font-weight: 700;
+                    color: #111;
+           }
+           span{
+               font-size: 13px;
+           }
+       }
+       p{
+           width: 100%;
+           @include textOver;
+               font-size: 13px;
+    color: #777;
+       }
+       .detail{
+           display: flex;
+           justify-content: space-between;
+           span{
+               color: #f63;
+                font-size: 21px;
+                font-weight: bold;
+           }
+           i{
+                   font-size: 13px;
+    color: #777;
+           }
+       }
+   }
+}
+

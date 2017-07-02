@@ -1,0 +1,17 @@
+@import '../../common/scss/_mixin.scss';
+.city-list{
+    display: flex;
+    flex-wrap: wrap;
+   
+    background: #fff;
+    justify-content: space-between;
+    li{
+        width: 33%;
+        text-align: center;
+        border-bottom: 1px solid #ededed;
+        border-right: 1px solid #ededed;
+        padding: 10px 0;
+       
+        @include textOver;
+    }
+}

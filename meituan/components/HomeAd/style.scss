@@ -1,0 +1,21 @@
+@import '../../common/scss/_mixin.scss';
+.home-ad{
+    background: #fff;
+    .home-ad-title{
+        padding: 10px 0;
+        text-indent: 1em;
+    }
+    .home-ad-list{
+        padding: 5px 10px;
+        @include clearfix;
+        .home-ad-list-item{
+            float: left;
+            width: 33.33%;
+            height: 140px;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+@import '../../common/scss/_mixin.scss';
+.category{
+    background: #fff;
+    .poins{
+    width: 100%;
+    text-align: center;
+    li{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        background: #ddd;
+        @include radius(50%);
+        &.active{
+            background:$primary-color; 
+        }
+        
+    }}
+    .slider{
+        display: flex;
+        flex-wrap: wrap;
+        li{
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            height: 50px;
+            padding: 10px 0;
+            justify-content: space-between;
+            i{
+                color: $primary-color;
+                font-size: 1.5em;
+            }
+        }
+    }
+}

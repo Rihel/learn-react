@@ -1,0 +1,30 @@
+@import '../../common/scss/_mixin.scss';
+
+.head {
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $primary-color;
+    height: 25px;
+    padding: 10px 0;
+    >div{
+        color: #fff;
+    }
+    .search-bar{
+        width: 50%;
+        background: #fff;
+        padding: 5px 10px;
+        border-radius: 10px;
+        i{
+            color: #000;
+        }
+        input{
+            margin-left: 4px;
+            border: none;
+        }
+    }
+}

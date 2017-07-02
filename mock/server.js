@@ -5,42 +5,49 @@ const KOA = require('koa'),
 let app = new KOA();
 
 function mockArr(option, key) {
-    var data = mock.mock(option)
+    var data = {
+        success: true,
+        data: mock.mock(option)
+    }
     return new Promise((resolve, reject) => {
-        resolve(data[key]);
+        resolve(data);
     });
 }
 
-router.get('/api/test', async ctx => {
+router.get('/api/homead', async ctx => {
     ctx.body = await mockArr({
-        'ad|20': [
-            {
-                title: '@ctitle(4)',
-                img: '@Image(30x30)',
-                link: '@url'
-            }
-        ]
-    }, 'ad');
+        'ads|6': [{
+            title: '@ctitle(4)',
+            img: '@image(30x30)' ,link: '@url'
+        }]
+    });
+})
+router.get('/api/citys', async ctx => {
+    ctx.body = await mockArr({
+        'citys|20': [{
+            name: '@city()',
+            'citycode|+1': 0
+        }]
+    })
 })
 router.get('/api/homelist/:city/:page', async ctx => {
     const params = ctx.params
     const paramsCity = params.city
     const paramsPage = params.page
     ctx.body = await mockArr({
-        'homelist|20': [
-            {
-                img: '@image(50x50)',
-                title: '@ctitle(4)',
-                subTitle: '@cparagraph(2)',
-                'price': '@integer(20,30)',
-                distance: '@integer(0,500)m',
-                'mumber': '@integer(200,500)'
-            }
-        ]
-    }, 'homelist');
+        'homelist|5': [{
+            img: '@image(90x90)',
+            title: '@ctitle(4)',
+            subTitle: '@cparagraph(1)',
+            'price': '@integer(20,30)',
+            distance: '@integer(0,500)m',
+            'number': '@integer(200,500)'
+        }],
+        hasMore:true
+    });
 })
 
-router
+
 
 app
     .use(router.routes())

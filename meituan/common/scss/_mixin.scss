@@ -1,0 +1,184 @@
+$legacy-support-for-ie:true;
+$keylist:-webkit-,
+-moz-,
+-ms-,
+-o-,
+"";
+$primary-color:#f63;
+@function opaColor($num) {
+    @return rgba(0, 0, 0, $num);
+}
+
+@mixin clearfix {
+    @if $legacy-support-for-ie {
+        *zoom: 1;
+    }
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+        overflow: hidden;
+    }
+}
+
+@mixin media($point) {
+    @if $point==superbig {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    }
+    @else if $point==lg {
+        @media only screen and (min-width: 992px) {
+            @content;
+        }
+    }
+    @else if $point==md {
+        @media only screen and (min-width: 768px) {
+            @content;
+        }
+    }
+    @else if $point==sm {
+        @media only screen and (min-width: 480px) {
+            @content;
+        }
+    }
+    @else if $point==xs {
+        @media only screen and (min-width: 320px) {
+            @content;
+        }
+    }
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin radius($num...) {
+    @include css3(border-radius, $num);
+}
+
+@mixin transition($num) {
+    @include css3(transition, $num)
+}
+
+@mixin css3($property, $value) {
+    @each $prefix in '',
+    -ms-,
+    -moz-,
+    -webkit-,
+    -o-,
+    {
+        #{$prefix}#{$property}: $value;
+    }
+}
+
+@mixin blockCenter {
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    ;
+}
+
+@mixin boxSizing {
+    @include css3(box-sizing, border-box);
+}
+
+@mixin boxShadow($num...) {
+    @include css3(box-shadow, $num);
+}
+
+@mixin animate($num...) {
+    @each $key in $keylist {
+        #{$key}animation: $num;
+    }
+}
+
+@mixin keyframs($name) {
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @-o-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@function rem($num) {
+    @return $num/10/2+rem;
+}
+
+@mixin border($dir, $color) {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        @if $dir==left {
+            width: 1px;
+            height: 100%;
+            left: 0;
+            top: 0;
+            transform: scaleY(0.5);
+        }
+        @else if $dir==right {
+            width: 1px;
+            height: 100%;
+            right: 0;
+            top: 0;
+            transform: scaleY(0.5);
+        }
+        @else if $dir==top {
+            width: 100%;
+            height: 1px;
+            left: 0;
+            top: 0;
+            transform: scaleX(0.5);
+        }
+        @else if $dir==bottom {
+            width: 100%;
+            height: 1px;
+            left: 0;
+            bottom: 0;
+            transform: scaleX(0.5);
+        }
+        background-color: $color;
+    }
+}
+
+@mixin textOver {
+    text-overflow: ellipsis;
+    /*这就是省略号喽*/
+    overflow: hidden;
+    /*设置超过的隐藏*/
+    white-space: nowrap;
+    /*设置不断行*/
+}
+
+@mixin colCenter {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin visCenter {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin rowCenter {
+    left: 50%;
+    transform: translateX(-50%);
+}

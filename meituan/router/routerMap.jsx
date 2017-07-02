@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { HashRouter, Route, Switch} from 'react-router-dom'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+
 import Home from '../containers/home/home';
-export default class RouterMap extends Component {
+import City from '../containers/City';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {update} from '../actions/action';
+import {getStorage} from '../until';
+import Loading from '@com/loading';
+class RouterMap extends Component {
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin
@@ -13,24 +20,43 @@ export default class RouterMap extends Component {
         isDone: false
     }
     componentWillMount = () => {
-        setTimeout(()=>{
-            this.setState({
-                isDone:true
-            })
-        },2000)
+        //从local storage获取城市
+        let cityName = getStorage('cityName');
+        if (cityName == null) {
+            cityName = '北京'
+        }
+
+        //将城市信息存储到redux？？
+        this
+            .props
+            .userInfoAction
+            .update({cityName})
+        this.setState({isDone: true})
+
     }
-    
+
     render() {
         return (
-            <Router>
+            <HashRouter>
 
                 {this.state.isDone
-                    ? <div>
+                    ? <Switch>
                             <Route exact path='/' component={Home}/>
-                        </div>
-                    : <div>正在加载中...</div>
-}   
-            </Router>
+                            <Route path='/city' component={City}/>
+                        </Switch>
+                    : <Loading/>}
+            </HashRouter>
         );
     }
 }
+const mapStateToProps = (state, ownProps) => {
+    return {}
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        userInfoAction: bindActionCreators({
+            update
+        }, dispatch)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RouterMap);
